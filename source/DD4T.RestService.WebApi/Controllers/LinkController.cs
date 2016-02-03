@@ -43,8 +43,7 @@ namespace DD4T.Rest.WebApi.Controllers
             if (string.IsNullOrEmpty(link))
                 return NotFound();
 
-            var typedLink = JsonConvert.DeserializeObject<dynamic>(link);
-            return Ok(typedLink);
+            return Ok(link);
         }
         [HttpGet]
         [Route("ResolveLink/{publicationId:int}/{componentUri:int}/{sourcePageUri:int}/{excludeComponentTemplateUri:int}")]
@@ -60,8 +59,7 @@ namespace DD4T.Rest.WebApi.Controllers
             if (string.IsNullOrEmpty(link))
                 return NotFound();
 
-            var typedLink = JsonConvert.DeserializeObject<dynamic>(link);
-            return Ok(typedLink);
+            return Ok(link);
         }
     }
 }
