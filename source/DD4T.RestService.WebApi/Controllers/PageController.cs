@@ -2,12 +2,14 @@
 using DD4T.ContentModel.Contracts.Logging;
 using DD4T.RestService.WebApi.Helpers;
 using System;
+using System.CodeDom;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
+using Newtonsoft.Json;
 
 namespace DD4T.RestService.WebApi.Controllers
 {
@@ -41,7 +43,8 @@ namespace DD4T.RestService.WebApi.Controllers
             if (string.IsNullOrEmpty(content))
                 return NotFound();
 
-            return Ok<string>(content);
+            var typedContent = JsonConvert.DeserializeObject<dynamic>(content);
+            return Ok(typedContent);
         }
 
         [HttpGet]
@@ -58,7 +61,8 @@ namespace DD4T.RestService.WebApi.Controllers
             if (string.IsNullOrEmpty(content))
                 return NotFound();
 
-            return Ok<string>(content);
+            var typedContent = JsonConvert.DeserializeObject<dynamic>(content);
+            return Ok(typedContent);
         }
 
         [HttpGet]

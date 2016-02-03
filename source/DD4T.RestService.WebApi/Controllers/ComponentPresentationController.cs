@@ -8,6 +8,7 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
+using Newtonsoft.Json;
 
 namespace DD4T.RestService.WebApi.Controllers
 {
@@ -46,7 +47,8 @@ namespace DD4T.RestService.WebApi.Controllers
             if (string.IsNullOrEmpty(content))
                 return NotFound();
 
-            return Ok<string>(content);
+            var typedContent = JsonConvert.DeserializeObject<dynamic>(content);
+            return Ok(typedContent);
         }
 
         [HttpGet]
@@ -81,7 +83,8 @@ namespace DD4T.RestService.WebApi.Controllers
             if (content.Count == 0)
                 return NotFound();
 
-            return Ok<List<string>>(content);
+            var typedContent = content.Select(item => JsonConvert.DeserializeObject<dynamic>(item));
+            return Ok(typedContent);
         }
 
         [HttpGet]
@@ -98,7 +101,8 @@ namespace DD4T.RestService.WebApi.Controllers
             if (content.Count == 0)
                 return NotFound();
 
-            return Ok<IList<string>>(content);
+            var typedContent = content.Select(item => JsonConvert.DeserializeObject<dynamic>(item));
+            return Ok(typedContent);
         }
 
     }

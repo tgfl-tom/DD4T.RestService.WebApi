@@ -7,6 +7,7 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
+using Newtonsoft.Json;
 
 namespace DD4T.Rest.WebApi.Controllers
 {
@@ -42,7 +43,8 @@ namespace DD4T.Rest.WebApi.Controllers
             if (string.IsNullOrEmpty(link))
                 return NotFound();
 
-            return Ok<string>(link);
+            var typedLink = JsonConvert.DeserializeObject<dynamic>(link);
+            return Ok(typedLink);
         }
         [HttpGet]
         [Route("ResolveLink/{publicationId:int}/{componentUri:int}/{sourcePageUri:int}/{excludeComponentTemplateUri:int}")]
@@ -58,7 +60,8 @@ namespace DD4T.Rest.WebApi.Controllers
             if (string.IsNullOrEmpty(link))
                 return NotFound();
 
-            return Ok<string>(link);
+            var typedLink = JsonConvert.DeserializeObject<dynamic>(link);
+            return Ok(typedLink);
         }
     }
 }
